@@ -1,0 +1,59 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:party.party,restriction_alternatives:"
+msgid "Alternative Parties"
+msgstr "Tercers alternatius"
+
+msgctxt "field:party.restriction.alternative,alternative_party:"
+msgid "Alternative Party"
+msgstr "Tercer alternatiu"
+
+msgctxt "field:party.restriction.alternative,create_date:"
+msgid "Create Date"
+msgstr "Data de creació"
+
+msgctxt "field:party.restriction.alternative,create_uid:"
+msgid "Create User"
+msgstr "Usuari de creació"
+
+msgctxt "field:party.restriction.alternative,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:party.restriction.alternative,party:"
+msgid "Party"
+msgstr "Tercer"
+
+msgctxt "field:party.restriction.alternative,rec_name:"
+msgid "Name"
+msgstr "Nom"
+
+msgctxt "field:party.restriction.alternative,sequence:"
+msgid "Sequence"
+msgstr "Seqüència"
+
+msgctxt "field:party.restriction.alternative,write_date:"
+msgid "Write Date"
+msgstr "Data modificación"
+
+msgctxt "field:party.restriction.alternative,write_uid:"
+msgid "Write User"
+msgstr "Usuari modificació"
+
+msgctxt "model:ir.action,name:act_party_restriction_alternative_tree"
+msgid "Restriction Alternative"
+msgstr "Alternatives de restriccions"
+
+msgctxt "model:party.restriction.alternative,name:"
+msgid "Restriction Alternative"
+msgstr "Alternatives de restriccions"
+
+msgctxt "view:party.restriction.alternative:"
+msgid "Party Restriction Alternatives"
+msgstr "Alternatives restricció tercer"
+
+msgctxt "view:party.restriction.alternative:"
+msgid "Party Restrition Alternative"
+msgstr "Alternativa restricció tercer"
