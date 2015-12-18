@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="party_restriction_alternative_view_form">
+            <field name="model">party.restriction.alternative</field>
+            <field name="type">form</field>
+            <field name="name">party_restriction_alternative_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="party_restriction_alternative_view_list">
+            <field name="model">party.restriction.alternative</field>
+            <field name="type">tree</field>
+            <field name="name">party_restriction_alternative_list</field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_party_restriction_alternative_tree">
+            <field name="name">Restriction Alternative</field>
+            <field name="res_model">party.restriction.alternative</field>
+        </record>
+        <record model="ir.action.act_window.view"
+                id="act_party_restriction_alternative_tree_view1">
+            <field name="act_window"
+                ref="act_party_restriction_alternative_tree"/>
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="party_restriction_alternative_view_list"/>
+        </record>
+        <record model="ir.action.act_window.view"
+                id="act_party_restriction_alternative_tree_view2">
+            <field name="act_window"
+                ref="act_party_restriction_alternative_tree"/>
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="party_restriction_alternative_view_form"/>
+        </record>
+        <record model="ir.model.access"
+                id="access_party_restriction_alternative">
+            <field name="model"
+                search="[('model', '=', 'party.restriction.alternative')]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_delete" eval="False"/>
+        </record>
+        <record model="ir.model.access"
+                id="access_party_restriction_alternative_admin">
+            <field name="model"
+                search="[('model', '=', 'party.restriction.alternative')]"/>
+            <field name="group"
+                ref="product_restrictions.group_product_restrictions_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+        <record model="ir.ui.view" id="party_view_form">
+            <field name="model">party.party</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="party.party_view_form"/>
+            <field name="name">party_form</field>
+        </record>
+    </data>
+</tryton>
