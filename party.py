@@ -28,28 +28,3 @@ class Party:
     __name__ = 'party.party'
     restriction_alternatives = fields.One2Many('party.restriction.alternative',
         'party', 'Alternative Parties')
-
-    def split_by_product_restrictions(self, products, type='customer'):
-        '''
-        Returns a dict with alternative parties as keys and the allowedi
-        products as values
-
-        The None key is used to indicate that the product is not allowed
-        for any party
-        '''
-        parties = [self] + [p.alternative_party for p in
-            self.restriction_alternatives]
-        splits = defaultdict(list)
-        for party in parties:
-            party_restrictions = set(getattr(party, '%s_restrictions' % type))
-            not_assigned = set(products) - set(chain(*splits.values()))
-            for product in not_assigned:
-                product_restrictions = set(product.restrictions)
-                if (product_restrictions and
-                        product_restrictions - party_restrictions):
-                    continue
-                splits[party].append(product)
-        not_assigned = set(products) - set(chain(*splits.values()))
-        if not_assigned:
-            splits[None] = list(not_assigned)
-        return dict(splits)
