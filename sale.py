@@ -14,9 +14,12 @@ class Sale:
     def quote(cls, sales):
         new_sales = []
         for sale in sales:
-            new_sales.append(sale)
             if sale.party.restriction_alternatives:
                 new_sales.extend(sale.split_by_product_restrictions())
+            if not sale.lines:
+                cls.delete([sale])
+            else:
+                new_sales.append(sale)
         super(Sale, cls).quote(new_sales)
 
     def split_by_product_restrictions(self):
@@ -40,9 +43,23 @@ class Sale:
             setattr(new_sale, key, value)
         new_sale.save()
 
+        tax2remove = [l.id for l in line.taxes]
+
         lines_to_write.extend((lines, {'sale': new_sale.id}))
         if lines_to_write:
             SaleLine.write(*lines_to_write)
 
-        return [new_sale]
+        lines_to_write, values = [], []
+        for line in lines:
+            line_vals = line.on_change_product()
+            values ={
+                'taxes': [
+                    ('remove', tax2remove),
+                    ('add', line_vals['taxes'])]
+                }
+            lines_to_write.extend(([line], values))
 
+        if lines_to_write:
+            SaleLine.write(*lines_to_write)
+
+        return [new_sale]
