@@ -43,14 +43,13 @@ class Sale:
             setattr(new_sale, key, value)
         new_sale.save()
 
-        tax2remove = [l.id for l in line.taxes]
-
         lines_to_write.extend((lines, {'sale': new_sale.id}))
         if lines_to_write:
             SaleLine.write(*lines_to_write)
 
         lines_to_write, values = [], []
         for line in lines:
+            tax2remove = [l.id for l in line.taxes]
             line_vals = line.on_change_product()
             values ={
                 'taxes': [
