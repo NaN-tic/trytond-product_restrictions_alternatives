@@ -1,6 +1,5 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-from collections import defaultdict
 from trytond.pool import Pool, PoolMeta
 
 __all__ = ['Sale']
@@ -28,37 +27,30 @@ class Sale:
 
         lines, lines_to_write = [], []
         for line in self.lines:
-            if line.product and not line.product.restrictions:
+            if line.product and line.product.template.restrictions:
                 lines.append(line)
 
         if not lines:
             return []
 
+        party_alternative = (
+            self.party.restriction_alternatives[0].alternative_party)
         new_sale, = self.__class__.copy([self], {
                 'lines': [],
                 })
-        alternative = self.party.restriction_alternatives[0]
-        new_sale.party = alternative.alternative_party.id
-        for key, value in new_sale.on_change_party().iteritems():
-            setattr(new_sale, key, value)
+        new_sale.party = party_alternative
+        new_sale.on_change_party()
         new_sale.save()
 
         lines_to_write.extend((lines, {'sale': new_sale.id}))
         if lines_to_write:
             SaleLine.write(*lines_to_write)
 
-        lines_to_write, values = [], []
         for line in lines:
-            tax2remove = [l.id for l in line.taxes]
-            line_vals = line.on_change_product()
-            values ={
-                'taxes': [
-                    ('remove', tax2remove),
-                    ('add', line_vals['taxes'])]
-                }
-            lines_to_write.extend(([line], values))
+            line.taxes = []
+            line.on_change_product()
 
-        if lines_to_write:
-            SaleLine.write(*lines_to_write)
+        if lines:
+            SaleLine.save(lines)
 
         return [new_sale]
