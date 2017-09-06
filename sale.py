@@ -28,7 +28,7 @@ class Sale:
 
         lines, lines_to_write = [], []
         for line in self.lines:
-            if line.product and not line.product.restrictions:
+            if line.product and line.product.restrictions:
                 lines.append(line)
 
         if not lines:

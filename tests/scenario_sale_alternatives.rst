@@ -245,17 +245,17 @@ Sale 5 products::
 The sale gets splitted to several ones when quoting it::
 
     >>> sale.click('quote')
-    >>> line, = sale.lines
-    >>> line.product == service
+    >>> sale.reload()
+    >>> s1, s2 = Sale.find([])
+    >>> s1.party.name == inflamable_customer.name
     True
-    >>> line.quantity
-    1.0
-    >>> new_sale, = Sale.find([('party', '=', inflamable_customer.id)])
-    >>> new_sale.party == inflamable_customer
+    >>> s2.party.name == customer.name
     True
-    >>> new_sale.invoice_address.party == inflamable_customer
+    >>> len(s1.lines) == 2
     True
-    >>> sorted([l.quantity for l in new_sale.lines])
-    [2.0, 3.0]
-    >>> [l.product == product for l in new_sale.lines]
+    >>> len(s2.lines) == 1
+    True
+    >>> [l.product == product for l in s1.lines]
     [True, True]
+    >>> [l.product == service for l in s2.lines]
+    [True]
