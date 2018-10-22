@@ -2,7 +2,7 @@
 <!-- The COPYRIGHT file at the top level of this repository contains the full
      copyright notices and license terms. -->
 <data>
-    <xpath expr="/form/notebook/page[@id='rescritions']" position="inside">
+    <xpath expr="/form/notebook/page[@id='restrictions']" position="inside">
         <field name="restriction_alternatives" colspan="2"/>
     </xpath>
 </data>

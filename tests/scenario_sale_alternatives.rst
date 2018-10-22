@@ -9,28 +9,18 @@ Imports::
     >>> from decimal import Decimal
     >>> from operator import attrgetter
     >>> from proteus import config, Model, Wizard
+    >>> from trytond.tests.tools import activate_modules
     >>> from trytond.modules.company.tests.tools import create_company, \
     ...     get_company
     >>> from trytond.modules.account.tests.tools import create_fiscalyear, \
-    ...     create_chart, get_accounts, create_tax, set_tax_code
+    ...     create_chart, get_accounts, create_tax
     >>> from trytond.modules.account_invoice.tests.tools import \
     ...     set_fiscalyear_invoice_sequences, create_payment_term
     >>> today = datetime.date.today()
 
-Create database::
+Activate product_restrictions_alternatives and sale modules::
 
-    >>> config = config.set_trytond()
-    >>> config.pool.test = True
-
-Install product_restrictions_alternatives::
-
-    >>> Module = Model.get('ir.module')
-    >>> sale_module, = Module.find([('name', '=', 'sale')])
-    >>> alternative_module, = Module.find([
-    ...     ('name', '=', 'product_restrictions_alternatives')])
-    >>> sale_module.click('install')
-    >>> alternative_module.click('install')
-    >>> Wizard('ir.module.install_upgrade').execute('upgrade')
+    >>> config = activate_modules(['product_restrictions_alternatives', 'sale'])
 
 Create company::
 
