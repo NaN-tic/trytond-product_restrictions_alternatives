@@ -3,10 +3,9 @@
 from trytond.pool import Pool, PoolMeta
 
 __all__ = ['Sale']
-__metaclass__ = PoolMeta
 
 
-class Sale:
+class Sale(metaclass=PoolMeta):
     __name__ = 'sale.sale'
 
     @classmethod

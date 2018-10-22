@@ -1,12 +1,9 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
-from collections import defaultdict
-from itertools import chain
 from trytond.model import ModelSQL, ModelView, fields
 from trytond.pool import PoolMeta
 
 __all__ = ['RestrictionAlternative', 'Party']
-__metaclass__ = PoolMeta
 
 
 class RestrictionAlternative(ModelSQL, ModelView):
@@ -24,7 +21,7 @@ class RestrictionAlternative(ModelSQL, ModelView):
         return [table.sequence == None, table.sequence]
 
 
-class Party:
+class Party(metaclass=PoolMeta):
     __name__ = 'party.party'
     restriction_alternatives = fields.One2Many('party.restriction.alternative',
         'party', 'Alternative Parties')

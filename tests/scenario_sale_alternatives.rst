@@ -149,7 +149,7 @@ Create an Inventory::
     >>> inventory_line.save()
     >>> Inventory.confirm([inventory.id], config.context)
     >>> inventory.state
-    u'done'
+    'done'
 
 Sale 5 products::
 
