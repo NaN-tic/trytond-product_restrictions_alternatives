@@ -58,14 +58,6 @@ Create chart of accounts::
     >>> account_tax = accounts['tax']
     >>> account_cash = accounts['cash']
 
-Create journals::
-
-    >>> Journal = Model.get('account.journal')
-    >>> cash_journal, = Journal.find([('type', '=', 'cash')])
-    >>> cash_journal.credit_account = account_cash
-    >>> cash_journal.debit_account = account_cash
-    >>> cash_journal.save()
-
 Create restrictions::
 
     >>> ProductRestriction = Model.get('product.restriction')
@@ -103,7 +95,6 @@ Create product::
     >>> template.name = 'product'
     >>> template.default_uom = unit
     >>> template.type = 'goods'
-    >>> template.purchasable = True
     >>> template.salable = True
     >>> template.list_price = Decimal('10')
     >>> template.cost_price_method = 'fixed'
