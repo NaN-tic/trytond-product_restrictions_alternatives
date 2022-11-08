@@ -9,7 +9,7 @@ __all__ = ['RestrictionAlternative', 'Party']
 class RestrictionAlternative(ModelSQL, ModelView):
     'Restriction Alternative'
     __name__ = 'party.restriction.alternative'
-    party = fields.Many2One('party.party', 'Party', select=True, required=True,
+    party = fields.Many2One('party.party', 'Party', required=True,
         ondelete='CASCADE')
     sequence = fields.Integer('Sequence')
     alternative_party = fields.Many2One('party.party', 'Alternative Party',
